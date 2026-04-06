@@ -8,6 +8,19 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        // HTML 頁面不快取，確保用戶永遠拿到最新版
+        source: "/",
+        headers: [
+          { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
+        ],
+      },
+      {
+        source: "/chat",
+        headers: [
+          { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
+        ],
+      },
+      {
         source: "/(.*)",
         headers: [
           // 防止 Clickjacking
