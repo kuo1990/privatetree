@@ -82,10 +82,7 @@ export default function ChatPage() {
           </span>
         </div>
 
-        <div className="hidden md:block">
-          <AdSlot width={100} height={28} label="廣告" />
-        </div>
-        <div className="md:hidden w-14" />
+        <div className="hidden md:block w-14" />
       </header>
 
       {/* 聊天主體 */}
@@ -120,13 +117,13 @@ export default function ChatPage() {
 
         {/* 桌面側欄廣告 */}
         <aside
-          className="hidden lg:flex flex-col items-center justify-center gap-4 w-[160px] flex-shrink-0 p-4"
+          className="hidden lg:flex flex-col items-center justify-center gap-4 w-[200px] flex-shrink-0 p-4"
           style={{
             borderLeft: "1.5px dashed var(--color-fog)",
             background: "var(--color-aged)",
           }}
         >
-          <AdSlot width={140} height={240} label="側邊廣告" />
+          <AdSlot width={180} height={240} label="側邊廣告" />
         </aside>
       </div>
 
