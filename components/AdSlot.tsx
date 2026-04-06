@@ -27,7 +27,6 @@ export default function AdSlot({ width, height }: AdSlotProps) {
         src={imgSrc}
         alt="廣告"
         fill
-        unoptimized
         style={{ objectFit: "cover" }}
       />
 

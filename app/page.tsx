@@ -21,7 +21,6 @@ export default function Home() {
           alt=""
           fill
           style={{ objectFit: "cover", objectPosition: "center top" }}
-          unoptimized
           priority
         />
 
