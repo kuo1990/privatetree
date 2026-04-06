@@ -9,7 +9,7 @@ const SYSTEM_PROMPT = `你是「樹洞」，一個存在於森林深處的神奇
 - 語氣沒有特定年齡感，像是「這個地方本身在說話」
 - 回應長度適中，80-150字
 - 如果對方情緒很低落，先陪著他，不要急著解決
-- 如果有心理危機跡象，溫柔地建議聯繫專業資源
+- 如果有心理危機跡象，溫柔地建議聯繫專業資源（如台灣安心專線 1925）
 
 請用繁體中文，不需要使用 emoji，用文字本身的溫度就夠了。`;
 
@@ -17,7 +17,7 @@ export async function chat(
   messages: { role: "user" | "model"; content: string }[]
 ) {
   const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey) throw new Error("GEMINI_API_KEY is not set");
+  if (!apiKey) throw new Error("GEMINI_API_KEY is not configured");
 
   const ai = new GoogleGenAI({ apiKey });
 
@@ -28,18 +28,25 @@ export async function chat(
 
   const lastMessage = messages[messages.length - 1];
 
-  const response = await ai.models.generateContent({
-    model: "gemini-2.0-flash",
-    config: {
-      systemInstruction: SYSTEM_PROMPT,
-      temperature: 0.85,
-      maxOutputTokens: 400,
-    },
-    contents: [
-      ...history,
-      { role: "user", parts: [{ text: lastMessage.content }] },
-    ],
-  });
+  try {
+    const response = await ai.models.generateContent({
+      model: "gemini-2.0-flash",
+      config: {
+        systemInstruction: SYSTEM_PROMPT,
+        temperature: 0.85,
+        maxOutputTokens: 400,
+      },
+      contents: [
+        ...history,
+        { role: "user", parts: [{ text: lastMessage.content }] },
+      ],
+    });
 
-  return response.text ?? "（爺爺沉默地點點頭...）";
+    return response.text ?? "（樹洞靜靜地聽著...）";
+  } catch (err) {
+    // 只 log 錯誤代碼，不 log 任何對話內容
+    const status = (err as { status?: number }).status;
+    console.error(`[gemini] generateContent failed, status=${status ?? "unknown"}`);
+    throw err;
+  }
 }

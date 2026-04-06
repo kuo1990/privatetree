@@ -151,6 +151,12 @@ export default function ChatPage() {
           >
             Enter 送出 · Shift+Enter 換行
           </p>
+          <p
+            className="text-center text-[10px] mt-1"
+            style={{ color: "var(--color-fog)", opacity: 0.7 }}
+          >
+            對話僅在你的裝置暫存，離開即消失，伺服器不留記錄
+          </p>
         </div>
       </div>
     </div>
