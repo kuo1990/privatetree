@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Sans_TC, ZCOOL_KuaiLe } from "next/font/google";
+import { Noto_Sans_TC } from "next/font/google";
 import "./globals.css";
 
 const notoSans = Noto_Sans_TC({
@@ -7,13 +7,7 @@ const notoSans = Noto_Sans_TC({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-body",
-});
-
-const zcoolKuaiLe = ZCOOL_KuaiLe({
-  weight: "400",
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-title",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -32,7 +26,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="zh-TW" className={`${notoSans.variable} ${zcoolKuaiLe.variable} h-full`}>
+    <html lang="zh-TW" className={`${notoSans.variable} h-full`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className="min-h-full flex flex-col relative z-[1]">{children}</body>
     </html>
   );
