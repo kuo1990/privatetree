@@ -22,14 +22,21 @@
 - `--color-rust` #C0522A 主要按鈕
 - `--color-gold` #C17F24 裝飾色
 字型：`--font-title`（ZCOOL KuaiLe 手寫感）、`--font-body`（Noto Sans TC）
+- `Noto_Sans_TC` 用 `next/font/google`（`variable: "--font-body"`）
+- `ZCOOL KuaiLe` 用直接 `<link>` Google Fonts（`next/font` 只支援 latin subset，中文字會 fallback）
+- `--font-title` 定義在 `app/globals.css` `@theme` 區塊
 
 ## 重要決策記錄
 - 不儲存對話，session 結束即消失（隱私核心設計）
 - 不加登入帳號，匿名是產品價值
 - 廣告位用 `AdSlot` 元件佔位（顯示生成的廣告佔位圖），之後換 Google AdSense
-- 插圖用 `unoptimized` 避免 Next.js Image 快取問題
+- 所有圖片（插圖、廣告）都用 `unoptimized`，避免 Next.js Image 優化快取導致圖片不更新
 - 每次重新生成插圖後需清 `.next/cache/images/`
 - gemini-2.0-flash 已停用，改用 gemini-2.5-flash
+- GitHub repo 須為 public，否則 Vercel Hobby 方案會因 committer 驗證失敗而擋部署
+- git 設定：`user.email = jk411423@gmail.com`，`user.name = kuo1990`
+- HTML 頁面設 `Cache-Control: no-cache`，確保部署後用戶重整即可拿到新版
+- 部署平台：Vercel，連接 GitHub `kuo1990/privatetree`，自動偵測 Next.js，環境變數需設 `GEMINI_API_KEY`
 
 ## 多語言（i18n）
 - 無外部套件，純 client-side 偵測：`navigator.language` 開頭 `zh` → 中文，其他 → 英文
@@ -45,9 +52,11 @@
 - 聊天側欄廣告：`hidden lg:flex`，只在大螢幕顯示
 
 ## AI 人設
-- 古老樹洞，見過無數人走來哭泣沉默離開，時間流動慢，永不急
-- 說話方式：短句留白、根據話語重量調整密度、自然使用自然意象、往裡走的問題
-- 明確禁止：清單建議、急著正向、套話（「我理解你的感受」等）
+- 慈祥老爺爺，坐在大樹下等人說話，見過很多事、走過很多歲月
+- 會鼓勵、會安慰，說話像真實的人，不像機器人
+- 偶爾用「孩子」「年輕人」稱呼，帶出爺爺感
+- 說話親切口語，有時幽默，有時認真陪伴，看情況而定
+- 危機處理：自殺傾向 → 1925，未成年人身安全 → 113
 
 ## 安全防護（已實作）
 - Rate limiting：每 IP 每分鐘 15 次
