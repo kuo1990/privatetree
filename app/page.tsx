@@ -1,65 +1,143 @@
+import Link from "next/link";
 import Image from "next/image";
+import AdSlot from "@/components/AdSlot";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+    <div className="flex flex-col min-h-screen">
+
+      {/* 全版首頁 */}
+      <main className="relative flex-1 flex flex-col items-center justify-end min-h-screen overflow-hidden">
+
+        {/* 背景圖 */}
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
+          src="/grandpa.png"
+          alt=""
+          fill
+          style={{ objectFit: "cover", objectPosition: "center top" }}
+          unoptimized
           priority
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+
+        {/* 漸層遮罩 — 上方透明，下方漸漸不透明讓文字浮現 */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: `linear-gradient(
+              to bottom,
+              rgba(254,246,228,0.05) 0%,
+              rgba(254,246,228,0.0)  35%,
+              rgba(254,246,228,0.7)  62%,
+              rgba(254,246,228,0.96) 80%,
+              rgba(254,246,228,1.0)  100%
+            )`,
+            pointerEvents: "none",
+          }}
+        />
+
+        {/* 角落裝飾 */}
+        <CornerDeco position="top-left" />
+        <CornerDeco position="top-right" />
+
+        {/* 文字內容區 — 沉在下半部 */}
+        <div className="relative z-10 w-full flex flex-col items-center text-center px-6 pb-14">
+
+          {/* 書名框 */}
+          <div className="animate-fade-in-up mb-3" style={{ animationDelay: "0.1s" }}>
+            <div
+              className="inline-block px-5 py-1 text-xs tracking-widest"
+              style={{
+                color: "var(--color-gold)",
+                border: "1px solid var(--color-gold)",
+                borderRadius: "1px 4px 2px 3px / 3px 1px 4px 2px",
+                opacity: 0.85,
+              }}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              一個傾聽的地方
+            </div>
+          </div>
+
+          {/* 標題 */}
+          <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+            <h1
+              className="text-6xl md:text-7xl mb-2 leading-tight"
+              style={{ fontFamily: "var(--font-title)", color: "var(--color-ink)" }}
             >
-              Learning
-            </a>{" "}
-            center.
+              樹洞
+            </h1>
+            <p
+              className="text-lg md:text-xl mb-1"
+              style={{ color: "var(--color-ink-light)" }}
+            >
+              說說心裡的話，樹洞會靜靜聆聽
+            </p>
+            <p className="text-sm" style={{ color: "var(--color-gold)", opacity: 0.9 }}>
+              不評斷 · 不說教 · 只是陪著你
+            </p>
+          </div>
+
+          {/* CTA */}
+          <div className="animate-fade-in-up mt-7" style={{ animationDelay: "0.35s" }}>
+            <Link
+              href="/chat"
+              className="inline-block px-10 py-4 text-lg transition-all duration-200 hover:scale-105 active:scale-95"
+              style={{
+                fontFamily: "var(--font-title)",
+                color: "var(--color-cream)",
+                background: "var(--color-rust)",
+                borderRadius: "3px 12px 4px 10px / 8px 3px 10px 4px",
+                boxShadow: "4px 4px 0 rgba(61,43,31,0.25), -1px -1px 0 rgba(61,43,31,0.1)",
+                letterSpacing: "0.05em",
+              }}
+            >
+              走進樹洞 →
+            </Link>
+          </div>
+
+          <p
+            className="animate-fade-in-up mt-4 text-xs"
+            style={{ animationDelay: "0.5s", color: "var(--color-fog)" }}
+          >
+            這裡很安靜，說多久都沒關係
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
       </main>
+
+      {/* 廣告 */}
+      <div
+        className="w-full flex justify-center py-3 px-4"
+        style={{ background: "var(--color-aged)", borderTop: "1px dashed var(--color-fog)" }}
+      >
+        <AdSlot width={728} height={90} label="廣告" />
+      </div>
+
+      <footer
+        className="text-center text-xs py-3"
+        style={{ color: "var(--color-fog)", background: "var(--color-aged)" }}
+      >
+        樹洞 · {new Date().getFullYear()}
+      </footer>
     </div>
+  );
+}
+
+function CornerDeco({ position }: { position: "top-left" | "top-right" }) {
+  const map: Record<string, React.CSSProperties> = {
+    "top-left":  { top: 20, left: 20 },
+    "top-right": { top: 20, right: 20, transform: "scaleX(-1)" },
+  };
+
+  return (
+    <svg
+      width="60" height="60" viewBox="0 0 60 60" fill="none"
+      style={{ position: "absolute", opacity: 0.3, pointerEvents: "none", zIndex: 10, ...map[position] }}
+    >
+      <path d="M5 55 L5 10 Q5 5 10 5 L55 5" stroke="#8B6240" strokeWidth="2" strokeLinecap="round" fill="none" />
+      <path d="M5 45 Q18 32 30 20" stroke="#8B6240" strokeWidth="1" strokeLinecap="round" fill="none" strokeDasharray="2,4" />
+      <circle cx="10" cy="10" r="2.5" fill="#C17F24" />
+      <path d="M20 5 Q22 2 25 5 Q22 8 20 5Z" fill="#9CB87A" />
+      <path d="M38 5 Q41 1 44 5 Q41 9 38 5Z" fill="#9CB87A" opacity="0.7" />
+    </svg>
   );
 }
