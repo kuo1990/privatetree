@@ -1,13 +1,15 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import type { Locale } from "@/lib/i18n";
 
 interface MessageInputProps {
   onSend: (text: string) => void;
   disabled?: boolean;
+  locale?: Locale;
 }
 
-export default function MessageInput({ onSend, disabled }: MessageInputProps) {
+export default function MessageInput({ onSend, disabled, locale = "zh" }: MessageInputProps) {
   const [value, setValue] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -51,7 +53,7 @@ export default function MessageInput({ onSend, disabled }: MessageInputProps) {
         onKeyDown={handleKeyDown}
         disabled={disabled}
         rows={1}
-        placeholder="有什麼想說的，跟爺爺說..."
+        placeholder={locale === "en" ? "Share what's on your mind..." : "有什麼想說的，慢慢說..."}
         className="flex-1 resize-none bg-transparent text-sm outline-none leading-relaxed"
         style={{
           color: "var(--color-ink)",
@@ -74,9 +76,9 @@ export default function MessageInput({ onSend, disabled }: MessageInputProps) {
           border: "1px solid rgba(61,43,31,0.12)",
           letterSpacing: "0.05em",
         }}
-        aria-label="送出"
+        aria-label={locale === "en" ? "Send" : "送出"}
       >
-        說吧
+        {locale === "en" ? "Send" : "說吧"}
       </button>
     </div>
   );

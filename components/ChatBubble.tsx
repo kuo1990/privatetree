@@ -1,10 +1,16 @@
+import type { Locale } from "@/lib/i18n";
+
 interface ChatBubbleProps {
   role: "user" | "model";
   content: string;
+  locale?: Locale;
 }
 
-export default function ChatBubble({ role, content }: ChatBubbleProps) {
+export default function ChatBubble({ role, content, locale = "zh" }: ChatBubbleProps) {
   const isUser = role === "user";
+  const userAvatar = locale === "en" ? "U" : "你";
+  const userLabel = locale === "en" ? "You" : "你";
+  const hollowLabel = locale === "en" ? "Tree Hollow" : "樹洞";
 
   return (
     <div className={`flex gap-3 items-end animate-slide-in ${isUser ? "flex-row-reverse" : "flex-row"}`}>
@@ -21,11 +27,11 @@ export default function ChatBubble({ role, content }: ChatBubbleProps) {
           color: "var(--color-ink)",
         }}
       >
-        {isUser ? "你" : "洞"}
+        {isUser ? userAvatar : "洞"}
       </div>
 
       {/* 氣泡 */}
-      <div className="flex flex-col gap-1 max-w-[76%]">
+      <div className="flex flex-col gap-1 max-w-[85%] md:max-w-[76%]">
         <span
           className="text-[11px] px-1"
           style={{
@@ -34,7 +40,7 @@ export default function ChatBubble({ role, content }: ChatBubbleProps) {
             textAlign: isUser ? "right" : "left",
           }}
         >
-          {isUser ? "你" : "樹洞"}
+          {isUser ? userLabel : hollowLabel}
         </span>
 
         <div

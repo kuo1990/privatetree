@@ -76,7 +76,8 @@ export async function POST(request: NextRequest) {
       return Response.json({ error: "無效的請求格式" }, { status: 400 });
     }
 
-    const reply = await chat(body.messages);
+    const locale = body.locale === "en" ? "en" : "zh";
+    const reply = await chat(body.messages, locale);
     return Response.json({ reply });
   } catch {
     // 只 log 錯誤類型，不 log 任何訊息內容

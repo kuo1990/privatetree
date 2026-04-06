@@ -1,8 +1,14 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import AdSlot from "@/components/AdSlot";
+import { useLocale, translations } from "@/lib/i18n";
 
 export default function Home() {
+  const locale = useLocale();
+  const t = translations[locale].home;
+
   return (
     <div className="flex flex-col min-h-screen">
 
@@ -36,7 +42,7 @@ export default function Home() {
           }}
         />
 
-        {/* 角落裝飾 */}
+        {/* 角落裝飾 — 小螢幕隱藏 */}
         <CornerDeco position="top-left" />
         <CornerDeco position="top-right" />
 
@@ -54,26 +60,26 @@ export default function Home() {
                 opacity: 0.85,
               }}
             >
-              一個傾聽的地方
+              {t.tagline}
             </div>
           </div>
 
           {/* 標題 */}
           <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
             <h1
-              className="text-6xl md:text-7xl mb-2 leading-tight"
+              className="text-5xl md:text-7xl mb-2 leading-tight"
               style={{ fontFamily: "var(--font-title)", color: "var(--color-ink)" }}
             >
-              樹洞
+              {t.title}
             </h1>
             <p
-              className="text-lg md:text-xl mb-1"
+              className="text-base md:text-xl mb-1"
               style={{ color: "var(--color-ink-light)" }}
             >
-              說說心裡的話，樹洞會靜靜聆聽
+              {t.subtitle}
             </p>
             <p className="text-sm" style={{ color: "var(--color-gold)", opacity: 0.9 }}>
-              不評斷 · 不說教 · 只是陪著你
+              {t.desc}
             </p>
           </div>
 
@@ -91,7 +97,7 @@ export default function Home() {
                 letterSpacing: "0.05em",
               }}
             >
-              走進樹洞 →
+              {t.cta}
             </Link>
           </div>
 
@@ -99,17 +105,22 @@ export default function Home() {
             className="animate-fade-in-up mt-4 text-xs"
             style={{ animationDelay: "0.5s", color: "var(--color-fog)" }}
           >
-            這裡很安靜，說多久都沒關係
+            {t.hint}
           </p>
         </div>
       </main>
 
-      {/* 廣告 */}
+      {/* 廣告 — 行動版 320×50，桌面版 728×90 */}
       <div
         className="w-full flex justify-center py-3 px-4"
         style={{ background: "var(--color-aged)", borderTop: "1px dashed var(--color-fog)" }}
       >
-        <AdSlot width={728} height={90} label="廣告" />
+        <div className="block md:hidden w-full flex justify-center">
+          <AdSlot width={320} height={50} />
+        </div>
+        <div className="hidden md:block">
+          <AdSlot width={728} height={90} />
+        </div>
       </div>
 
       <footer
@@ -131,6 +142,7 @@ function CornerDeco({ position }: { position: "top-left" | "top-right" }) {
   return (
     <svg
       width="60" height="60" viewBox="0 0 60 60" fill="none"
+      className="hidden sm:block"
       style={{ position: "absolute", opacity: 0.3, pointerEvents: "none", zIndex: 10, ...map[position] }}
     >
       <path d="M5 55 L5 10 Q5 5 10 5 L55 5" stroke="#8B6240" strokeWidth="2" strokeLinecap="round" fill="none" />

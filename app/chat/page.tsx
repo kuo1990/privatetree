@@ -6,22 +6,25 @@ import ChatBubble from "@/components/ChatBubble";
 import MessageInput from "@/components/MessageInput";
 import LoadingDots from "@/components/LoadingDots";
 import AdSlot from "@/components/AdSlot";
+import { useLocale, translations } from "@/lib/i18n";
 
 interface Message {
   role: "user" | "model";
   content: string;
 }
 
-const WELCOME_MESSAGE: Message = {
-  role: "model",
-  content:
-    "你來了。\n\n這裡很安靜，沒有人會評斷你，也不會有人催你。\n\n想說什麼，就慢慢說吧。",
-};
-
 export default function ChatPage() {
-  const [messages, setMessages] = useState<Message[]>([WELCOME_MESSAGE]);
+  const locale = useLocale();
+  const t = translations[locale].chat;
+
+  const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
+
+  // Set welcome message when locale resolves
+  useEffect(() => {
+    setMessages([{ role: "model", content: t.welcome }]);
+  }, [locale]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -37,15 +40,12 @@ export default function ChatPage() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: updated }),
+        body: JSON.stringify({ messages: updated, locale }),
       });
       const data = await res.json();
-      setMessages([...updated, { role: "model", content: data.reply ?? "（樹洞靜靜地聽著...）" }]);
+      setMessages([...updated, { role: "model", content: data.reply ?? t.fallback }]);
     } catch {
-      setMessages([
-        ...updated,
-        { role: "model", content: "樹洞暫時安靜了，稍後再說說吧。" },
-      ]);
+      setMessages([...updated, { role: "model", content: t.error }]);
     } finally {
       setLoading(false);
     }
@@ -67,7 +67,7 @@ export default function ChatPage() {
           className="text-sm transition-opacity hover:opacity-60"
           style={{ color: "var(--color-ink-light)" }}
         >
-          ← 離開
+          {t.leave}
         </Link>
 
         <div className="flex flex-col items-center">
@@ -75,10 +75,10 @@ export default function ChatPage() {
             className="text-base leading-tight"
             style={{ fontFamily: "var(--font-title)", color: "var(--color-ink)" }}
           >
-            樹洞
+            {t.name}
           </span>
           <span className="text-[10px]" style={{ color: "var(--color-gold)" }}>
-            正在傾聽
+            {t.listening}
           </span>
         </div>
 
@@ -92,7 +92,7 @@ export default function ChatPage() {
           style={{ background: "var(--color-paper)" }}
         >
           {messages.map((msg, i) => (
-            <ChatBubble key={i} role={msg.role} content={msg.content} />
+            <ChatBubble key={i} role={msg.role} content={msg.content} locale={locale} />
           ))}
 
           {loading && (
@@ -141,18 +141,18 @@ export default function ChatPage() {
         </div>
 
         <div className="max-w-2xl mx-auto">
-          <MessageInput onSend={handleSend} disabled={loading} />
+          <MessageInput onSend={handleSend} disabled={loading} locale={locale} />
           <p
             className="text-center text-[11px] mt-1.5"
             style={{ color: "var(--color-fog)" }}
           >
-            Enter 送出 · Shift+Enter 換行
+            {t.hint}
           </p>
           <p
             className="text-center text-[10px] mt-1"
             style={{ color: "var(--color-fog)", opacity: 0.7 }}
           >
-            對話僅在你的裝置暫存，離開即消失，伺服器不留記錄
+            {t.privacy}
           </p>
         </div>
       </div>

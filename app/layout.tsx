@@ -17,11 +17,11 @@ const zcoolKuaiLe = ZCOOL_KuaiLe({
 });
 
 export const metadata: Metadata = {
-  title: "樹洞爺爺 — 說說你的心事吧",
-  description: "有個老爺爺坐在大樹下，等著聽你說話。不評斷，只傾聽。",
+  title: "樹洞 — 說說心裡的話",
+  description: "一個安靜的地方，說說心事。不評斷，不說教，只是陪著你。",
   openGraph: {
-    title: "樹洞爺爺 — 說說你的心事吧",
-    description: "有個老爺爺坐在大樹下，等著聽你說話",
+    title: "樹洞 — 說說心裡的話",
+    description: "一個安靜的地方，說說心事。不評斷，不說教，只是陪著你。",
     locale: "zh_TW",
   },
 };
