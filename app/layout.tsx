@@ -14,11 +14,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://privatetree.vercel.app"),
   title: "樹洞爺爺 — 說說心裡的話 | Tree Hollow",
   description:
-    "樹洞爺爺是免費、匿名的 AI 傾訴空間。不需登入，不留記錄，說完即消失。心情難受時，讓樹洞爺爺靜靜陪你說說心事。不評斷、不說教，只是陪著你。",
+    "樹洞爺爺是免費、匿名的傾訴空間。不需登入，不留記錄，說完即消失。心情難受時，讓樹洞爺爺靜靜陪你說說心事。不評斷、不說教，只是陪著你。",
   openGraph: {
     title: "樹洞爺爺 — 說說心裡的話 | Tree Hollow",
     description:
-      "樹洞爺爺是免費、匿名的 AI 傾訴空間。不需登入，不留記錄，說完即消失。心情難受時，讓樹洞爺爺靜靜陪你說說心事。",
+      "樹洞爺爺是免費、匿名的傾訴空間。不需登入，不留記錄，說完即消失。心情難受時，讓樹洞爺爺靜靜陪你說說心事。",
     locale: "zh_TW",
     type: "website",
     url: "https://privatetree.vercel.app",
