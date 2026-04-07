@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_TC } from "next/font/google";
+import { Analytics } from '@vercel/analytics/next';
 import "./globals.css";
 
 const notoSans = Noto_Sans_TC({
@@ -48,7 +49,10 @@ export default function RootLayout({
         href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap"
         rel="stylesheet"
       />
-      <body className="min-h-full flex flex-col relative z-[1]">{children}</body>
+      <body className="min-h-full flex flex-col relative z-[1]">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
