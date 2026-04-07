@@ -24,6 +24,9 @@ export const metadata: Metadata = {
     url: "https://privatetree.vercel.app",
     images: [{ url: "/grandpa.png", width: 1200, height: 630, alt: "樹洞爺爺" }],
   },
+  verification: {
+    google: "0vdn8uYrqFAg0jO2VZmkt7bQWMsXJB0Vvt1w21EWA4A",
+  },
   twitter: {
     card: "summary_large_image",
     title: "樹洞爺爺 — 說說心裡的話",
