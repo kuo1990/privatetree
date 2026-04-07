@@ -58,7 +58,7 @@ export const translations = {
       hint: "It's quiet here. Take all the time you need.",
       seoHeading: "What is Tree Hollow?",
       seoBody:
-        "Tree Hollow is a free, anonymous AI listening space. No login required, no records kept — everything disappears when you leave. When you're feeling overwhelmed, stressed, or just need somewhere to talk, the grandfather of the hollow is quietly here with you.",
+        "Tree Hollow is a free, anonymous space to share what's on your mind. No login required, no records kept — everything disappears when you leave. When you're feeling overwhelmed, stressed, or just need somewhere to talk, the grandfather of the hollow is quietly here with you.",
     },
     chat: {
       leave: "← Leave",

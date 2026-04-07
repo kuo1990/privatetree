@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "樹洞爺爺 — 說說心裡的話",
-    description: "免費、匿名 AI 傾訴空間。不評斷、不說教，只是陪著你。",
+    description: "免費、匿名的傾訴空間。不評斷、不說教，只是陪著你。",
     images: ["/grandpa.png"],
   },
 };
