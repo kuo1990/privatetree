@@ -26,6 +26,9 @@ export const translations = {
       desc: "不評斷 · 不說教 · 只是陪著你",
       cta: "走進樹洞 →",
       hint: "這裡很安靜，說多久都沒關係",
+      seoHeading: "什麼是樹洞爺爺？",
+      seoBody:
+        "樹洞爺爺是一個免費、匿名的 AI 傾訴空間。不需要登入，不留下任何記錄，對話在你離開後即消失。心情難受、壓力大、或只是想找個地方說說話，樹洞爺爺都在這裡靜靜陪著你。",
     },
     chat: {
       leave: "← 離開",
@@ -53,6 +56,9 @@ export const translations = {
       desc: "No judgment · No lectures · Just here with you",
       cta: "Enter the Hollow →",
       hint: "It's quiet here. Take all the time you need.",
+      seoHeading: "What is Tree Hollow?",
+      seoBody:
+        "Tree Hollow is a free, anonymous AI listening space. No login required, no records kept — everything disappears when you leave. When you're feeling overwhelmed, stressed, or just need somewhere to talk, the grandfather of the hollow is quietly here with you.",
     },
     chat: {
       leave: "← Leave",

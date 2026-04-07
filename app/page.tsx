@@ -123,6 +123,22 @@ export default function Home() {
         </div>
       </div>
 
+      {/* SEO 介紹文字 */}
+      <section
+        className="w-full max-w-xl mx-auto px-6 py-6 text-center"
+        style={{ background: "var(--color-aged)" }}
+      >
+        <h2
+          className="text-sm font-semibold mb-2"
+          style={{ color: "var(--color-ink)", opacity: 0.5 }}
+        >
+          {t.seoHeading}
+        </h2>
+        <p className="text-xs leading-relaxed" style={{ color: "var(--color-fog)" }}>
+          {t.seoBody}
+        </p>
+      </section>
+
       <footer
         className="text-center text-xs py-3"
         style={{ color: "var(--color-fog)", background: "var(--color-aged)" }}
